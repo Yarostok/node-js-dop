@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "http": "^0.0.1-security",
+    "needle": "^3.0.0",
+    "node-fetch": "^3.1.0",
+    "socket.io": "^4.4.0"
+  }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Скраппер</title>
+</head>
+<body>
+<table border="1" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+  <th colspan=2><h2>Скраппер</h2></th>
+  </tr>
+  <tr>
+    <th width="20%">
+       
+      <button id="ShowButton" type="button" onclick="seek()">Обновить данные</button>
+      <br>
+      Температура: 
+      <br>
+        Минимум: 
+      <input id="tb1" type="text" size="20" value="-5"> 
+      <br>
+      Максимум: 
+      <input id="tb2" type="text" size="20" value="5"> 
+      <br>
+      Скорость ветра: 
+      <br>
+        Минимум: 
+      <input id="tb3" type="text" size="20" value="5"> 
+      <br>
+        Максимум: 
+      <input id="tb4" type="text" size="20" value="15"> 
+      <br>
+      Допустимый угол: 
+      <br>
+        Минимум: 
+      <input id="tb5" type="text" size="20" value="180"> 
+      <br>
+        Максимум: 
+      <input id="tb6" type="text" size="20" value="360"> 
+    </th>
+    <th id="addArea" width="80%" align="left">
+      
+    </th>
+  </tr>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io.connect('http://localhost:3000');
+  setInterval(seek, 10000);
+  socket.on("get", (vat) => {
+  console.log(vat);
+
+  var ind = document.getElementById('addArea');
+  console.log(ind);
+  ind.innerHTML = vat;
+  });
+
+
+function seek(){
+  var dataseek=[document.getElementById("tb1").value,
+  document.getElementById("tb2").value,
+  document.getElementById("tb3").value,
+  document.getElementById("tb4").value,
+  document.getElementById("tb5").value,
+  document.getElementById("tb6").value
+  ];
+  console.log(dataseek);
+  socket.emit('seek',dataseek);
+  };
+</script> 
+</body>
+</html>
